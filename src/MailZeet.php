@@ -2,11 +2,11 @@
 
 namespace MailZeet;
 
-use GuzzleWrapper;
 use MailZeet\Configs\Config;
 use MailZeet\Exceptions\InvalidPayloadException;
 use MailZeet\Helpers\RequestHelper;
 use MailZeet\Objects\MailObject;
+use MailZeet\Utils\GuzzleWrapper;
 
 class MailZeet
 {
@@ -48,7 +48,7 @@ class MailZeet
         $data = $emailObject->toArray();
 
         $response = $httpClient->post(
-            '/mail/send',
+            '/email',
             $data,
             [
                 'Authorization' => "Bearer {$this->apiKey}",

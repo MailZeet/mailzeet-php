@@ -15,12 +15,7 @@ class MailObject
 
     private array $params = [];
 
-    private int $priority;
-
-    public function __invoke()
-    {
-        $this->priority = Config::PRIORITY_NORMAL;
-    }
+    private int $priority = Config::PRIORITY_NORMAL;
 
     public function template(string $templateId): self
     {
@@ -72,11 +67,11 @@ class MailObject
     public function toArray(): array
     {
         return [
-            'template_id' => $this->templateId,
-            'to'          => $this->to,
-            'params'      => $this->params,
-            'priority'    => $this->priority,
-            'reply_to'    => $this->replyTo,
+            'template_id'       => $this->templateId,
+            'to_email'          => $this->to,
+            'params'            => $this->params,
+            'priority'          => $this->priority,
+            'reply_to_email'    => $this->replyTo,
         ];
     }
 }

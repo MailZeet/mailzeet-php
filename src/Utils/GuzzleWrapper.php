@@ -1,5 +1,7 @@
 <?php
 
+namespace MailZeet\Utils;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\GuzzleException;
@@ -7,6 +9,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use MailZeet\Configs\Config;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 /**
  * GuzzleWrapper - A comprehensive Guzzle wrapper for making HTTP requests.
@@ -41,7 +44,7 @@ class GuzzleWrapper
      *
      * @return array the response data
      */
-    public function get(string $endpoint, array $data = [], array $headers = []): array
+    public function get(string $endpoint, array $data = [], array $headers = []): Response
     {
         return $this->request('GET', $endpoint, $data, $headers);
     }
@@ -55,7 +58,7 @@ class GuzzleWrapper
      *
      * @return array the response data
      */
-    public function post(string $endpoint, array $data = [], array $headers = []): array
+    public function post(string $endpoint, array $data = [], array $headers = []): Response
     {
         return $this->request('POST', $endpoint, $data, $headers);
     }
@@ -69,7 +72,7 @@ class GuzzleWrapper
      *
      * @return array the response data
      */
-    public function put(string $endpoint, array $data = [], array $headers = []): array
+    public function put(string $endpoint, array $data = [], array $headers = []): Response
     {
         return $this->request('PUT', $endpoint, $data, $headers);
     }
@@ -83,7 +86,7 @@ class GuzzleWrapper
      *
      * @return array the response data
      */
-    public function delete(string $endpoint, array $data = [], array $headers = []): array
+    public function delete(string $endpoint, array $data = [], array $headers = []): Response
     {
         return $this->request('DELETE', $endpoint, $data, $headers);
     }
@@ -100,6 +103,8 @@ class GuzzleWrapper
      */
     private function request(string $method, string $endpoint, array $data, array $headers): Response
     {
+        $url = $this->formatUrl($endpoint);
+
         $defaultHeaders = [
             'User-Agent'    => 'MailZeet PHP SDK v' . Config::VERSION,
             'Accept'        => 'application/json',
@@ -111,7 +116,7 @@ class GuzzleWrapper
         try {
             return $this->client->request(
                 $method,
-                $endpoint,
+                $url,
                 [
                     'headers' => $headers,
                     'json'    => $data,
@@ -120,5 +125,14 @@ class GuzzleWrapper
         } catch (RequestException|GuzzleException $e) {
             throw new RuntimeException('HTTP Request failed: ' . $e->getMessage());
         }
+    }
+
+    private function formatUrl(string $endpoint): string
+    {
+        $formattedBaseUrl = rtrim($this->baseUrl, '/') . '/';
+
+        $formattedEndpoint = ltrim($endpoint, '/');
+
+        return $formattedBaseUrl . $formattedEndpoint;
     }
 }

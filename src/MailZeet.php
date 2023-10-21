@@ -8,19 +8,34 @@ use MailZeet\Helpers\RequestHelper;
 use MailZeet\Objects\MailObject;
 use MailZeet\Utils\GuzzleWrapper;
 
+/**
+ * Class MailZeet.
+ *
+ * Represents the primary handler for sending emails using the MailZeet service.
+ */
 class MailZeet
 {
     use RequestHelper;
 
-    private string $environment;
-
+    /**
+     * @var string mailZeet API key for authentication
+     */
     public string $apiKey;
 
     /**
-     *  API base URL.
+     * @var string mailZeet API base URL
      */
     public string $baseUrl;
 
+    /**
+     * Constructor for the MailZeet class.
+     *
+     * @param string $apiKey  mailZeet's API key
+     * @param bool   $devMode determines if the dev mode is activated
+     * @param string $baseUrl Base URL for MailZeet's API. Defaults to the value in Config.
+     *
+     * @throws InvalidPayloadException if the API key is not set or if the base URL is invalid
+     */
     public function __construct(
         string $apiKey,
         bool $devMode = false,
@@ -41,6 +56,15 @@ class MailZeet
         }
     }
 
+    /**
+     * Send the email using MailZeet.
+     *
+     * @param MailObject $emailObject an object representation of the email
+     *
+     * @throws \JsonException
+     *
+     * @return object the API response from MailZeet
+     */
     public function send(MailObject $emailObject): object
     {
         $httpClient = new GuzzleWrapper($this->baseUrl);

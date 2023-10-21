@@ -2,7 +2,6 @@
 
 namespace MailZeet\Utils;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
@@ -16,14 +15,15 @@ use RuntimeException;
  */
 class GuzzleWrapper
 {
-    private $client;
+    private GuzzleHttpClient $client;
 
-    private $baseUrl;
+    private string $baseUrl;
 
     /**
      * Constructor initializes the Guzzle client with a base URL.
      *
-     * @param string $baseUrl the base URL for the HTTP client
+     * @param string                $baseUrl the base URL for the HTTP client
+     * @param GuzzleHttpClient|null $client  (optional) custom Guzzle client
      */
     public function __construct(string $baseUrl, GuzzleHttpClient $client = null)
     {
@@ -39,10 +39,10 @@ class GuzzleWrapper
      * Make a GET request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     optional data parameters
-     * @param array  $headers  optional headers
+     * @param array  $data     (optional) data parameters
+     * @param array  $headers  (optional) headers
      *
-     * @return array the response data
+     * @return Response the response data
      */
     public function get(string $endpoint, array $data = [], array $headers = []): Response
     {
@@ -53,10 +53,10 @@ class GuzzleWrapper
      * Make a POST request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     optional data parameters
-     * @param array  $headers  optional headers
+     * @param array  $data     (optional) data parameters
+     * @param array  $headers  (optional) headers
      *
-     * @return array the response data
+     * @return Response the response data
      */
     public function post(string $endpoint, array $data = [], array $headers = []): Response
     {
@@ -67,10 +67,10 @@ class GuzzleWrapper
      * Make a PUT request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     optional data parameters
-     * @param array  $headers  optional headers
+     * @param array  $data     (optional) data parameters
+     * @param array  $headers  (optional) headers
      *
-     * @return array the response data
+     * @return Response the response data
      */
     public function put(string $endpoint, array $data = [], array $headers = []): Response
     {
@@ -81,10 +81,10 @@ class GuzzleWrapper
      * Make a DELETE request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     optional data parameters
-     * @param array  $headers  optional headers
+     * @param array  $data     (optional) data parameters
+     * @param array  $headers  (optional) headers
      *
-     * @return array the response data
+     * @return Response the response data
      */
     public function delete(string $endpoint, array $data = [], array $headers = []): Response
     {

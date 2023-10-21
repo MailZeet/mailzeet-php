@@ -75,7 +75,7 @@ In dev mode, the SDK will use the `devBaseUrl` instead of the default base URL `
 - Each time you make a change, you must update the README.md file.
 
 ## Security Vulnerabilities
-If you discover a security vulnerability within MailZeet php SDK, please send an e-mail to MailZeet Security via [hello@mailzeet.com](mailto:security@mailzeet.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within MailZeet PHP SDK, please send an e-mail to MailZeet Security via [hello@mailzeet.com](mailto:security@mailzeet.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 The MailZeet PHP SDK is open-sourced software licensed under the [MIT license](LICENSE.md).

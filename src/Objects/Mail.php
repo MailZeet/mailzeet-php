@@ -2,6 +2,8 @@
 
 namespace MailZeet\Objects;
 
+use MailZeet\Configs\Config;
+
 /**
  * Class MailObject.
  *
@@ -30,6 +32,8 @@ class Mail
     protected ?string $html = null;
 
     protected ?string $text = null;
+
+    protected int $priority = Config::PRIORITY_NORMAL;
 
     public function getReplyTo(): array
     {
@@ -156,6 +160,18 @@ class Mail
         return $this;
     }
 
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
     private function mapToArray(array $data, string $objectClass): array
     {
         $array = [];
@@ -185,6 +201,7 @@ class Mail
             'params'       => $this->getParams(),
             'attachments'  => $this->getAttachments(),
             'track_opens'  => $this->trackOpens(),
+            'priority'     => $this->getPriority(),
         ];
     }
 }

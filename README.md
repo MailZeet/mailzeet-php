@@ -6,9 +6,6 @@
 # MailZeet PHP SDK
 
 <!-- Nav header - Start -->
-
-<a href="https://join.slack.com/t/ballerine-oss/shared_invite/zt-1iu6otkok-OqBF3TrcpUmFd9oUjNs2iw">Slack</a>
-·
 <a href="https://www.mailzeet.com/">Website</a>
 ·
 <a href="https://www.mailzeet.com/contact">Contact</a>

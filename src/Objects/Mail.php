@@ -26,7 +26,9 @@ class Mail
     protected bool $trackOpens = true;
 
     protected ?string $subject = null;
+
     protected ?string $html = null;
+
     protected ?string $text = null;
 
     public function getReplyTo(): array
@@ -120,7 +122,6 @@ class Mail
         return $this;
     }
 
-
     public function getParams(): array
     {
         return $this->params;
@@ -139,7 +140,7 @@ class Mail
 
     public function setAttachments(array $attachments): Mail
     {
-        $this->attachments = $attachments;
+        $this->attachments = $this->mapToArray($attachments, Attachment::class);
         return $this;
     }
 
@@ -173,17 +174,17 @@ class Mail
     public function toArray(): array
     {
         return [
-            'reply_to' => $this->getReplyTo(),
-            'recipients' => $this->getRecipients(),
-            'cc' => $this->getCc(),
-            'bcc' => $this->getBcc(),
-            'template_id' => $this->getTemplateId(),
+            'reply_to'     => $this->getReplyTo(),
+            'recipients'   => $this->getRecipients(),
+            'cc'           => $this->getCc(),
+            'bcc'          => $this->getBcc(),
+            'template_id'  => $this->getTemplateId(),
             'text_content' => $this->getText(),
             'html_content' => $this->getHtml(),
-            'subject' => $this->getSubject(),
-            'params' => $this->getParams(),
-            'attachments' => $this->getAttachments(),
-            'track_opens' => $this->trackOpens(),
+            'subject'      => $this->getSubject(),
+            'params'       => $this->getParams(),
+            'attachments'  => $this->getAttachments(),
+            'track_opens'  => $this->trackOpens(),
         ];
     }
 }

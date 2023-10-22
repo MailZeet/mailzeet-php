@@ -61,9 +61,9 @@ class MailZeet
      *
      * @param Mail $emailObject an object representation of the email
      *
-     * @return object the API response from MailZeet
-     *@throws \JsonException
+     * @throws \JsonException
      *
+     * @return object the API response from MailZeet
      */
     public function send(Mail $emailObject): object
     {

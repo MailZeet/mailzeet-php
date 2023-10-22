@@ -37,4 +37,9 @@ class Recipient
             'email' => $this->email,
         ];
     }
+
+    public static function make(string $email, string $name = ''): self
+    {
+        return new self($email, $name);
+    }
 }

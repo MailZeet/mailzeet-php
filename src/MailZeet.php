@@ -5,7 +5,7 @@ namespace MailZeet;
 use MailZeet\Configs\Config;
 use MailZeet\Exceptions\InvalidPayloadException;
 use MailZeet\Helpers\RequestHelper;
-use MailZeet\Objects\MailObject;
+use MailZeet\Objects\Mail;
 use MailZeet\Utils\GuzzleWrapper;
 
 /**
@@ -59,13 +59,13 @@ class MailZeet
     /**
      * Send the email using MailZeet.
      *
-     * @param MailObject $emailObject an object representation of the email
-     *
-     * @throws \JsonException
+     * @param Mail $emailObject an object representation of the email
      *
      * @return object the API response from MailZeet
+     *@throws \JsonException
+     *
      */
-    public function send(MailObject $emailObject): object
+    public function send(Mail $emailObject): object
     {
         $httpClient = new GuzzleWrapper($this->baseUrl);
 

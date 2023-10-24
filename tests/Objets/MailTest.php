@@ -3,9 +3,6 @@
 namespace MailZeet\Tests\Objets;
 
 use MailZeet\Configs\Config;
-use MailZeet\Exceptions\InvalidPayloadException;
-use MailZeet\MailZeet;
-use MailZeet\Objects\Attachment;
 use MailZeet\Objects\Mail;
 use MailZeet\Objects\Recipient;
 use PHPUnit\Framework\TestCase;
@@ -13,8 +10,8 @@ use PHPUnit\Framework\TestCase;
 class MailTest extends TestCase
 {
     /**
-    * @test
-    */
+     * @test
+     */
     public function it_should_set_and_get_reply_to(): void
     {
         $mail = new Mail();

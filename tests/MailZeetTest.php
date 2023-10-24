@@ -1,11 +1,9 @@
 <?php
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\Psr7\Response;
 use MailZeet\Configs\Config;
 use MailZeet\Exceptions\BadRequestException;
 use MailZeet\Exceptions\ForbiddenException;
@@ -18,11 +16,11 @@ use MailZeet\Exceptions\UnauthorizedException;
 use MailZeet\MailZeet;
 use MailZeet\Objects\Mail;
 use MailZeet\Tests\TestCase;
-use MailZeet\Utils\GuzzleWrapper;
 
 class MailZeetTest extends TestCase
 {
     private MockHandler $mockHandler;
+
     protected GuzzleHttpClient $mockHttpClient;
 
     public function setUp(): void
@@ -31,7 +29,7 @@ class MailZeetTest extends TestCase
         $handlerStack = HandlerStack::create($this->mockHandler);
 
         $this->mockHttpClient = new GuzzleHttpClient([
-            'handler' => $handlerStack,
+            'handler'     => $handlerStack,
             'http_errors' => false,
         ]);
     }
@@ -41,9 +39,9 @@ class MailZeetTest extends TestCase
     {
         $responseBody = json_encode([
             'message' => 'Email sent successfully',
-            'data' => [
-                'sendingId' => '1234567890'
-            ]
+            'data'    => [
+                'sendingId' => '1234567890',
+            ],
         ], JSON_THROW_ON_ERROR);
 
         $this->mockHandler->append(new Response(200, [], $responseBody));
@@ -147,7 +145,6 @@ class MailZeetTest extends TestCase
         $mailZeet->send($mail);
     }
 
-
     /** @test */
     public function it_throws_server_error_exception_for_other_responses(): void
     {
@@ -161,4 +158,3 @@ class MailZeetTest extends TestCase
         $mailZeet->send($mail);
     }
 }
-

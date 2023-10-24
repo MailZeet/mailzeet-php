@@ -2,12 +2,9 @@
 
 namespace MailZeet\Tests\Objets;
 
-use MailZeet\Configs\Config;
 use MailZeet\Exceptions\InvalidPayloadException;
 use MailZeet\MailZeet;
 use MailZeet\Objects\Recipient;
-use MailZeet\Payment;
-use MailZeet\Payout;
 use PHPUnit\Framework\TestCase;
 
 class RecipientTest extends TestCase

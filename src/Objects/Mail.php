@@ -13,7 +13,7 @@ class Mail
 {
     protected array $reply_to = [];
 
-    protected array $recipients;
+    protected array $recipients = [];
 
     protected array $cc = [];
 
@@ -185,6 +185,11 @@ class Mail
         }
 
         return $array;
+    }
+
+    public static function make(): self
+    {
+        return new self();
     }
 
     public function toArray(): array

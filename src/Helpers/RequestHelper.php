@@ -14,9 +14,12 @@ use MailZeet\Exceptions\UnauthorizedException;
 
 trait RequestHelper
 {
-    private function handleResponse(Response $response)
+    protected function handleResponse(Response $response)
     {
-        $responsePayload = json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
+        $contents = $response->getBody()->getContents();
+        $responsePayload = empty($contents)
+            ? $contents
+            : json_decode($contents, false, 512, JSON_THROW_ON_ERROR);
 
         switch ($response->getStatusCode()) {
             case 201:

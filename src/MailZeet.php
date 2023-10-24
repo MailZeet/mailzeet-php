@@ -2,6 +2,7 @@
 
 namespace MailZeet;
 
+use GuzzleHttp\Client as GuzzleHttpClient;
 use MailZeet\Configs\Config;
 use MailZeet\Exceptions\InvalidPayloadException;
 use MailZeet\Helpers\RequestHelper;
@@ -27,20 +28,25 @@ class MailZeet
      */
     public string $baseUrl;
 
+    private ?GuzzleHttpClient $guzzleCustomClient = null;
+
     /**
      * Constructor for the MailZeet class.
      *
-     * @param string $apiKey  mailZeet's API key
-     * @param bool   $devMode determines if the dev mode is activated
-     * @param string $baseUrl Base URL for MailZeet's API. Defaults to the value in Config.
+     * @param string                $apiKey  mailZeet's API key
+     * @param bool                  $devMode determines if the dev mode is activated
+     * @param string                $baseUrl Base URL for MailZeet's API. Defaults to the value in Config.
+     * @param GuzzleHttpClient|null $client  (optional) custom Guzzle client
      *
      * @throws InvalidPayloadException if the API key is not set or if the base URL is invalid
      */
     public function __construct(
         string $apiKey,
         bool $devMode = false,
-        string $baseUrl = Config::BASE_URL
+        string $baseUrl = Config::BASE_URL,
+        GuzzleHttpClient $client = null
     ) {
+        $this->guzzleCustomClient = $client;
         $this->apiKey = $apiKey;
 
         $this->baseUrl = ($devMode === true)
@@ -67,7 +73,10 @@ class MailZeet
      */
     public function send(Mail $emailObject): object
     {
-        $httpClient = new GuzzleWrapper($this->baseUrl);
+        $httpClient = new GuzzleWrapper(
+            $this->baseUrl,
+            $this->guzzleCustomClient
+        );
 
         $data = $emailObject->toArray();
 

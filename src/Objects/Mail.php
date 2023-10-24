@@ -137,17 +137,6 @@ class Mail
         return $this;
     }
 
-    public function getAttachments(): array
-    {
-        return $this->attachments;
-    }
-
-    public function setAttachments(array $attachments): Mail
-    {
-        $this->attachments = $this->mapToArray($attachments, Attachment::class);
-        return $this;
-    }
-
     public function trackOpens(): ?bool
     {
         return $this->trackOpens;
@@ -204,7 +193,6 @@ class Mail
             'html_content' => $this->getHtml(),
             'subject'      => $this->getSubject(),
             'params'       => $this->getParams(),
-            'attachments'  => $this->getAttachments(),
             'track_opens'  => $this->trackOpens(),
             'priority'     => $this->getPriority(),
         ];

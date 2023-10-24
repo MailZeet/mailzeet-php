@@ -22,7 +22,8 @@ use MailZeet\Utils\GuzzleWrapper;
 
 class MailZeetTest extends TestCase
 {
-    private $mockHandler;
+    private MockHandler $mockHandler;
+    protected GuzzleHttpClient $mockHttpClient;
 
     public function setUp(): void
     {

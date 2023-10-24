@@ -128,22 +128,6 @@ class MailTest extends TestCase
     /**
      * @test
      */
-    public function it_should_set_and_get_attachments(): void
-    {
-        $attachment = $this->createMock(Attachment::class);
-        $attachment->method('toArray')->willReturn(['filename' => 'file.txt']);
-
-        $mail = new Mail();
-        $mail->setAttachments([$attachment]);
-
-        $attachments = $mail->getAttachments();
-
-        self::assertEquals('file.txt', $attachments[0]['filename']);
-    }
-
-    /**
-     * @test
-     */
     public function it_should_set_and_get_trackOpens(): void
     {
         $mail = new Mail();
@@ -183,17 +167,6 @@ class MailTest extends TestCase
 
         $this->expectException(\InvalidArgumentException::class);
         $mail->setBcc(['invalid-bcc']);
-    }
-
-    /**
-     * @test
-     */
-    public function it_should_throw_exception_for_invalid_attachments(): void
-    {
-        $mail = new Mail();
-
-        $this->expectException(\InvalidArgumentException::class);
-        $mail->setAttachments(['invalid-attachment']);
     }
 
     /**

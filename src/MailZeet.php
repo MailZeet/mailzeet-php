@@ -33,9 +33,9 @@ class MailZeet
     /**
      * Constructor for the MailZeet class.
      *
-     * @param string                $apiKey  mailZeet's API key
+     * @param string                $apiKey  MailZeet API key
      * @param bool                  $devMode determines if the dev mode is activated
-     * @param string                $baseUrl Base URL for MailZeet's API. Defaults to the value in Config.
+     * @param string                $baseUrl Base URL for MailZeet API. Defaults to the value in Config.
      * @param GuzzleHttpClient|null $client  (optional) custom Guzzle client
      *
      * @throws InvalidPayloadException if the API key is not set or if the base URL is invalid

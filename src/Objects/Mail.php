@@ -11,7 +11,7 @@ use MailZeet\Configs\Config;
  */
 class Mail
 {
-    protected array $reply_to = [];
+    protected array $replyTo = [];
 
     protected array $recipients = [];
 
@@ -19,7 +19,7 @@ class Mail
 
     protected array $bcc = [];
 
-    protected ?string $template_id = null;
+    protected ?string $templateId = null;
 
     protected array $attachments = [];
 
@@ -37,12 +37,14 @@ class Mail
 
     public function getReplyTo(): array
     {
-        return $this->reply_to;
+        return $this->replyTo;
     }
 
-    public function setReplyTo(array $reply_to): Mail
+    public function setReplyTo($replyTo): Mail
     {
-        $this->reply_to = $this->mapToArray($reply_to, Recipient::class);
+        $replyTo = is_array($replyTo) ? $replyTo : [$replyTo];
+
+        $this->replyTo = $this->mapToArray($replyTo, Recipient::class);
 
         return $this;
     }
@@ -52,8 +54,10 @@ class Mail
         return $this->recipients;
     }
 
-    public function setRecipients(array $recipients): Mail
+    public function setRecipients($recipients): Mail
     {
+        $recipients = is_array($recipients) ? $recipients : [$recipients];
+
         $this->recipients = $this->mapToArray($recipients, Recipient::class);
 
         return $this;
@@ -64,8 +68,10 @@ class Mail
         return $this->cc;
     }
 
-    public function setCc(array $cc): Mail
+    public function setCc($cc): Mail
     {
+        $cc = is_array($cc) ? $cc : [$cc];
+
         $this->cc = $this->mapToArray($cc, Recipient::class);
 
         return $this;
@@ -76,20 +82,22 @@ class Mail
         return $this->bcc ?? [];
     }
 
-    public function setBcc(array $bcc): Mail
+    public function setBcc($bcc): Mail
     {
+        $bcc = is_array($bcc) ? $bcc : [$bcc];
+
         $this->bcc = $this->mapToArray($bcc, Recipient::class);
         return $this;
     }
 
     public function getTemplateId(): ?string
     {
-        return $this->template_id;
+        return $this->templateId;
     }
 
-    public function setTemplateId(string $template_id): Mail
+    public function setTemplateId(string $templateId): Mail
     {
-        $this->template_id = $template_id;
+        $this->templateId = $templateId;
         return $this;
     }
 

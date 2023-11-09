@@ -33,6 +33,8 @@ class Mail
 
     protected ?string $text = null;
 
+    protected ?string $language = null;
+
     protected int $priority = Config::PRIORITY_NORMAL;
 
     public function getReplyTo(): array
@@ -169,6 +171,18 @@ class Mail
         return $this;
     }
 
+    public function setLanguage(string $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
     private function mapToArray(array $data, string $objectClass): array
     {
         $array = [];
@@ -203,6 +217,7 @@ class Mail
             'params'       => $this->getParams(),
             'track_opens'  => $this->trackOpens(),
             'priority'     => $this->getPriority(),
+            'language'     => $this->getLanguage(),
         ];
     }
 }

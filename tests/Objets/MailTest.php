@@ -90,6 +90,17 @@ class MailTest extends TestCase
     /**
      * @test
      */
+    public function it_should_set_and_get_language(): void
+    {
+        $mail = new Mail();
+        $mail->setLanguage('en');
+
+        self::assertEquals('en', $mail->getLanguage());
+    }
+
+    /**
+     * @test
+     */
     public function it_should_set_and_get_html(): void
     {
         $mail = new Mail();

@@ -10,7 +10,7 @@ final class Config
 
     public const PRIORITY_NORMAL = 0;
 
-    public const BASE_URL = 'https://api.mailzeet.io/v1';
+    public const BASE_URL = 'https://api.mailzeet.com/v1';
 
     public const TIMEOUT = 5;
 }

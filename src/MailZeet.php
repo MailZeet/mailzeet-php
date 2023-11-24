@@ -81,7 +81,7 @@ class MailZeet
         $data = $emailObject->toArray();
 
         $response = $httpClient->post(
-            '/email',
+            '/mails',
             $data,
             [
                 'Authorization' => "Bearer {$this->apiKey}",

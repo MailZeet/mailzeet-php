@@ -7,7 +7,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use MailZeet\Configs\Config;
-use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
 /**
@@ -99,9 +98,9 @@ class GuzzleWrapper
      * @param array  $data     data parameters
      * @param array  $headers  headers
      *
-     * @return ResponseInterface response data
+     * @return Response response data
      */
-    private function request(string $method, string $endpoint, array $data, array $headers): Response
+    private function request(string $method, string $endpoint, array $data, array $headers)
     {
         $url = $this->formatUrl($endpoint);
 

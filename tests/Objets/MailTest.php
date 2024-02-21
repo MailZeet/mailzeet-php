@@ -3,8 +3,8 @@
 namespace MailZeet\Tests\Objets;
 
 use MailZeet\Configs\Config;
+use MailZeet\Objects\Address;
 use MailZeet\Objects\Mail;
-use MailZeet\Objects\Recipient;
 use PHPUnit\Framework\TestCase;
 
 class MailTest extends TestCase
@@ -15,7 +15,7 @@ class MailTest extends TestCase
     public function it_should_set_and_get_reply_to(): void
     {
         $mail = new Mail();
-        $mail->setReplyTo([new Recipient('test@example.com', 'Test User')]);
+        $mail->setReplyTo([new Address('test@example.com', 'Test User')]);
 
         $replyTo = $mail->getReplyTo();
 
@@ -29,7 +29,7 @@ class MailTest extends TestCase
     public function it_should_set_and_get_recipients(): void
     {
         $mail = new Mail();
-        $mail->setRecipients([new Recipient('recipient@example.com', 'Recipient')]);
+        $mail->setRecipients([new Address('recipient@example.com', 'Recipient')]);
 
         $recipients = $mail->getRecipients();
 
@@ -43,7 +43,7 @@ class MailTest extends TestCase
     public function it_should_set_and_get_cc(): void
     {
         $mail = new Mail();
-        $mail->setCc([new Recipient('cc@example.com', 'Cc User')]);
+        $mail->setCc([new Address('cc@example.com', 'Cc User')]);
 
         $cc = $mail->getCc();
 
@@ -57,7 +57,7 @@ class MailTest extends TestCase
     public function it_should_set_and_get_bcc(): void
     {
         $mail = new Mail();
-        $mail->setBcc([new Recipient('bcc@example.com', 'Bcc User')]);
+        $mail->setBcc([new Address('bcc@example.com', 'Bcc User')]);
 
         $bcc = $mail->getBcc();
 

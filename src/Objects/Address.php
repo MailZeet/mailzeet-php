@@ -4,7 +4,7 @@ namespace MailZeet\Objects;
 
 use MailZeet\Exceptions\InvalidPayloadException;
 
-class Recipient
+class Address
 {
     protected string $name;
 

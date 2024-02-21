@@ -37,6 +37,19 @@ class Mail
 
     protected int $priority = Config::PRIORITY_NORMAL;
 
+    private ?Address $sender;
+
+    public function getSender(): ?Address
+    {
+        return $this->sender;
+    }
+
+    public function setSender(?Address $sender): Mail
+    {
+        $this->sender = $sender;
+        return $this;
+    }
+
     public function getReplyTo(): array
     {
         return $this->replyTo;
@@ -46,7 +59,7 @@ class Mail
     {
         $replyTo = is_array($replyTo) ? $replyTo : [$replyTo];
 
-        $this->replyTo = $this->mapToArray($replyTo, Recipient::class);
+        $this->replyTo = $this->mapToArray($replyTo, Address::class);
 
         return $this;
     }
@@ -60,7 +73,7 @@ class Mail
     {
         $recipients = is_array($recipients) ? $recipients : [$recipients];
 
-        $this->recipients = $this->mapToArray($recipients, Recipient::class);
+        $this->recipients = $this->mapToArray($recipients, Address::class);
 
         return $this;
     }
@@ -74,7 +87,7 @@ class Mail
     {
         $cc = is_array($cc) ? $cc : [$cc];
 
-        $this->cc = $this->mapToArray($cc, Recipient::class);
+        $this->cc = $this->mapToArray($cc, Address::class);
 
         return $this;
     }
@@ -88,7 +101,7 @@ class Mail
     {
         $bcc = is_array($bcc) ? $bcc : [$bcc];
 
-        $this->bcc = $this->mapToArray($bcc, Recipient::class);
+        $this->bcc = $this->mapToArray($bcc, Address::class);
         return $this;
     }
 
@@ -216,6 +229,7 @@ class Mail
             'subject'      => $this->getSubject(),
             'params'       => $this->getParams(),
             'track_opens'  => $this->trackOpens(),
+            'sender'       => $this->getSender() ? $this->getSender()->toArray() : null,
             'priority'     => $this->getPriority(),
             'language'     => $this->getLanguage(),
         ];

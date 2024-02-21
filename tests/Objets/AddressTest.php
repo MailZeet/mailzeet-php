@@ -4,10 +4,10 @@ namespace MailZeet\Tests\Objets;
 
 use MailZeet\Exceptions\InvalidPayloadException;
 use MailZeet\MailZeet;
-use MailZeet\Objects\Recipient;
+use MailZeet\Objects\Address;
 use PHPUnit\Framework\TestCase;
 
-class RecipientTest extends TestCase
+class AddressTest extends TestCase
 {
     /**
      * It should construct a MailZeet object.
@@ -16,7 +16,7 @@ class RecipientTest extends TestCase
      */
     public function it_should_properly_sets_recipient_params(): void
     {
-        $recipient = (new Recipient('email@mailersend.com', 'Recipient'))->toArray();
+        $recipient = (new Address('email@mailersend.com', 'Recipient'))->toArray();
 
         self::assertEquals('email@mailersend.com', $recipient['email']);
         self::assertEquals('Recipient', $recipient['name']);
@@ -31,7 +31,7 @@ class RecipientTest extends TestCase
     {
         $this->expectException(InvalidPayloadException::class);
 
-        new Recipient(
+        new Address(
             'fake-email',
             'Recipient'
         );

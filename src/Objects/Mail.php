@@ -37,7 +37,7 @@ class Mail
 
     protected int $priority = Config::PRIORITY_NORMAL;
 
-    private ?Address $sender;
+    private ?Address $sender = null;
 
     public function getSender(): ?Address
     {

@@ -3,10 +3,11 @@
 namespace MailZeet\Tests;
 
 use Faker\Factory;
+use Faker\Generator;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected \Faker\Generator $faker;
+    protected Generator $faker;
 
     public function setUp(): void
     {

@@ -19,9 +19,9 @@ use MailZeet\Tests\TestCase;
 
 class MailZeetTest extends TestCase
 {
-    private MockHandler $mockHandler;
-
     protected GuzzleHttpClient $mockHttpClient;
+
+    private MockHandler $mockHandler;
 
     public function setUp(): void
     {

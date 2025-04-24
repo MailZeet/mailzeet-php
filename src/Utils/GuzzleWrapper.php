@@ -21,8 +21,8 @@ class GuzzleWrapper
     /**
      * Constructor initializes the Guzzle client with a base URL.
      *
-     * @param string                $baseUrl the base URL for the HTTP client
-     * @param GuzzleHttpClient|null $client  (optional) custom Guzzle client
+     * @param string $baseUrl the base URL for the HTTP client
+     * @param null|GuzzleHttpClient $client (optional) custom Guzzle client
      */
     public function __construct(string $baseUrl, GuzzleHttpClient $client = null)
     {
@@ -38,8 +38,8 @@ class GuzzleWrapper
      * Make a GET request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     (optional) data parameters
-     * @param array  $headers  (optional) headers
+     * @param array $data (optional) data parameters
+     * @param array $headers (optional) headers
      *
      * @return Response the response data
      */
@@ -52,8 +52,8 @@ class GuzzleWrapper
      * Make a POST request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     (optional) data parameters
-     * @param array  $headers  (optional) headers
+     * @param array $data (optional) data parameters
+     * @param array $headers (optional) headers
      *
      * @return Response the response data
      */
@@ -66,8 +66,8 @@ class GuzzleWrapper
      * Make a PUT request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     (optional) data parameters
-     * @param array  $headers  (optional) headers
+     * @param array $data (optional) data parameters
+     * @param array $headers (optional) headers
      *
      * @return Response the response data
      */
@@ -80,8 +80,8 @@ class GuzzleWrapper
      * Make a DELETE request.
      *
      * @param string $endpoint the API endpoint
-     * @param array  $data     (optional) data parameters
-     * @param array  $headers  (optional) headers
+     * @param array $data (optional) data parameters
+     * @param array $headers (optional) headers
      *
      * @return Response the response data
      */
@@ -93,10 +93,10 @@ class GuzzleWrapper
     /**
      * Makes an HTTP request using Guzzle.
      *
-     * @param string $method   HTTP method
+     * @param string $method HTTP method
      * @param string $endpoint API endpoint
-     * @param array  $data     data parameters
-     * @param array  $headers  headers
+     * @param array $data data parameters
+     * @param array $headers headers
      *
      * @return Response response data
      */
@@ -121,7 +121,7 @@ class GuzzleWrapper
                     'json'    => $data,
                 ]
             );
-        } catch (RequestException|GuzzleException $e) {
+        } catch (GuzzleException|RequestException $e) {
             throw new RuntimeException('HTTP Request failed: ' . $e->getMessage());
         }
     }

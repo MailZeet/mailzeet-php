@@ -2,8 +2,6 @@
 
 namespace MailZeet\Objects;
 
-use MailZeet\Exceptions\InvalidPayloadException;
-
 class Address
 {
     protected string $name;
@@ -14,20 +12,6 @@ class Address
     {
         $this->setEmail($email);
         $this->setName($name);
-    }
-
-    private function setName(?string $name): void
-    {
-        $this->name = $name;
-    }
-
-    private function setEmail(string $email): void
-    {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            throw new InvalidPayloadException('Email is not valid.');
-        }
-
-        $this->email = $email;
     }
 
     public function toArray(): array
@@ -41,5 +25,15 @@ class Address
     public static function make(string $email, string $name = ''): self
     {
         return new self($email, $name);
+    }
+
+    private function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+    private function setEmail(string $email): void
+    {
+        $this->email = $email;
     }
 }

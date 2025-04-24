@@ -47,6 +47,7 @@ class Mail
     public function setSender(?Address $sender): Mail
     {
         $this->sender = $sender;
+
         return $this;
     }
 
@@ -102,6 +103,7 @@ class Mail
         $bcc = is_array($bcc) ? $bcc : [$bcc];
 
         $this->bcc = $this->mapToArray($bcc, Address::class);
+
         return $this;
     }
 
@@ -113,6 +115,7 @@ class Mail
     public function setTemplateId(string $templateId): Mail
     {
         $this->templateId = $templateId;
+
         return $this;
     }
 
@@ -124,6 +127,7 @@ class Mail
     public function setSubject(string $subject): Mail
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -135,6 +139,7 @@ class Mail
     public function setHtml(?string $html): Mail
     {
         $this->html = $html;
+
         return $this;
     }
 
@@ -146,6 +151,7 @@ class Mail
     public function setText(?string $text): Mail
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -157,6 +163,7 @@ class Mail
     public function setParams(array $variables): Mail
     {
         $this->params = $variables;
+
         return $this;
     }
 
@@ -196,21 +203,6 @@ class Mail
         return $this->language;
     }
 
-    private function mapToArray(array $data, string $objectClass): array
-    {
-        $array = [];
-
-        foreach ($data as $item) {
-            if (! $item instanceof $objectClass) {
-                throw new \InvalidArgumentException(sprintf('Item must be an instance of %s', $objectClass));
-            }
-
-            $array[] = $item->toArray();
-        }
-
-        return $array;
-    }
-
     public static function make(): self
     {
         return new self();
@@ -233,5 +225,20 @@ class Mail
             'priority'     => $this->getPriority(),
             'language'     => $this->getLanguage(),
         ];
+    }
+
+    private function mapToArray(array $data, string $objectClass): array
+    {
+        $array = [];
+
+        foreach ($data as $item) {
+            if (! $item instanceof $objectClass) {
+                throw new \InvalidArgumentException(sprintf('Item must be an instance of %s', $objectClass));
+            }
+
+            $array[] = $item->toArray();
+        }
+
+        return $array;
     }
 }

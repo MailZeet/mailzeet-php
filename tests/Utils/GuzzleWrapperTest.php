@@ -6,6 +6,7 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use MailZeet\Tests\TestCase;
 use MailZeet\Utils\GuzzleWrapper;
@@ -54,7 +55,7 @@ class GuzzleWrapperTest extends TestCase
     /** @test */
     public function it_throws_runtime_exception_on_request_error(): void
     {
-        $this->mockHandler->append(new RequestException('Error Communicating with Server', new \GuzzleHttp\Psr7\Request('GET', 'test')));
+        $this->mockHandler->append(new RequestException('Error Communicating with Server', new Request('GET', 'test')));
 
         $this->expectException(RuntimeException::class);
 
